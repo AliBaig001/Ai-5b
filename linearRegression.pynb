@@ -1,0 +1,31 @@
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+
+# Load the dataset
+data = pd.read_csv("homeprices.csv")
+
+# Extract independent (X) and dependent (y) variables
+X = data[['area']]  # Features (Independent variable)
+y = data['price']   # Target (Dependent variable)
+
+# Create and train the Linear Regression model
+model = LinearRegression()
+model.fit(X, y)
+
+# Predictions
+predictions = model.predict(X)
+
+# Display results
+print("Model Coefficient (Slope):", model.coef_[0])
+print("Model Intercept:", model.intercept_)
+print("Predictions:", predictions)
+
+# Visualize the results
+plt.scatter(X, y, color='blue', label='Data Points')
+plt.plot(X, predictions, color='red', label='Regression Line')
+plt.xlabel('Area (sq ft)')
+plt.ylabel('Price')
+plt.title('Linear Regression on Home Prices')
+plt.legend()
+plt.show()
